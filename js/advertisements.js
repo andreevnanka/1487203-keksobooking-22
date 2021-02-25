@@ -1,5 +1,5 @@
 import {getRandomInteger, getRandomNumber, getRandomArrayElement, shuffleArr} from './util.js';
-import {AVATAR_INDEX_MIN, AVATAR_INDEX_MAX, TYPES, FEATURES, getPhotosArray, DESCRIPTIONS, ADVERTISEMENTS_COUNT,  LATITUDE_MIN, LATITUDE_MAX, LONGITUDE_MIN, LONGITUDE_MAX, ROUNDING_DEGREE} from './advertisements-data.js';
+import {AVATAR_INDEX_MIN, AVATAR_INDEX_MAX, TYPES, FEATURES, PHOTOS, DESCRIPTIONS, ADVERTISEMENTS_COUNT,  LATITUDE_MIN, LATITUDE_MAX, LONGITUDE_MIN, LONGITUDE_MAX, ROUNDING_DEGREE} from './advertisements-data.js';
 
 
 const createAdvertisement = function() {
@@ -21,8 +21,8 @@ const createAdvertisement = function() {
   const shuffledFeatures = shuffleArr(FEATURES);
   const features = shuffledFeatures.splice(0, getRandomInteger(1, FEATURES.length));
   const description = getRandomArrayElement(DESCRIPTIONS);
-  const shuffledPhotos = shuffleArr(getPhotosArray());
-  const photos = shuffledPhotos.splice(0, getRandomInteger(1, getPhotosArray().length));
+  const shuffledPhotos = shuffleArr(PHOTOS);
+  const photos = shuffledPhotos.splice(0, getRandomInteger(1, PHOTOS.length));
   const  offer = {
     title: 'Добро пожаловать!',
     address: address,
@@ -42,7 +42,7 @@ const createAdvertisement = function() {
     y: y,
   };
   const advertisement = {author, offer, location};
-  return advertisement;
+  return(advertisement);
 }
 
 const freshAdvertisements = new Array(ADVERTISEMENTS_COUNT).fill(null).map(() => createAdvertisement());

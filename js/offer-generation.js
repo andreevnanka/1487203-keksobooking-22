@@ -49,11 +49,12 @@ const createAdvert = function (offerArr) {
     }
     let capacityText= document.createTextNode(wordSet);
     return capacityText;
-  capacity.appendChild(getCapacityText());
-  listItem.appendChild(capacity);
+  };
+    capacity.appendChild(getCapacityText());
+    listItem.appendChild(capacity);
 
-  const time = makeElement('p', 'popup__text--time', 'Заезд после ' + advertisement.checkin + ', выезд до ' + advertisement.checkout);
-  listItem.appendChild(time);
+    const time = makeElement('p', 'popup__text--time', 'Заезд после ' + advertisement.checkin + ', выезд до ' + advertisement.checkout);
+    listItem.appendChild(time);
 
   const  features = makeElement('ul', 'popup__features');
   
@@ -79,18 +80,18 @@ const createAdvert = function (offerArr) {
   avatar.src = author.avatar;
   listItem.appendChild(avatar);
 
-  return (listItem);
+  return(listItem);
 };
 
 //Функция,создающая объявления из сгенерированного обьекта
+
 const createAdverts = function(advertisementsArray) {
-  let cards = document.getElementById('card');
-  advertisementsArray.forEach((item) => {
+  const cards = document.getElementById('card');
+  advertisementsArray.forEach(function(item) {
     const popupOffer = createAdvert(item);
     cards.appendChild(popupOffer);
   });
-  }
-  return (cards);
+  return(cards);
 };
 
 export {createAdvert, createAdverts};

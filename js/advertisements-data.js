@@ -1,4 +1,4 @@
-import {getRandomInteger} from './util.js';
+// import {getRandomInteger} from './util.js';
 
 const AVATAR_INDEX_MIN = 1;
 const AVATAR_INDEX_MAX = 8;
@@ -11,10 +11,8 @@ const ROUNDING_DEGREE =  2;
 
 const ADVERTISEMENTS_COUNT = 10;
 
-const PHOTO_LENGTH = 3;
+const PHOTO_LENGTH = 3;/*getRandomInteger(1,3);*/
 const PHOTOS = Array.from({length: PHOTO_LENGTH}, ((value,index) => 'http://o0.github.io/assets/images/tokyo/hotel'+(index+1)+'.jpg'));
-// new Array(ADVERTISEMENTS_COUNT).fill(null).map((value,index) => 'http://o0.github.io/assets/images/tokyo/hotel'+(index+1)+'.jpg');
-// 
 
 const TYPES = [
   'palace',

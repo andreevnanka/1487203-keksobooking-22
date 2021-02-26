@@ -1,4 +1,6 @@
-import {createAdvert, createAdverts} from'./offer-generation.js';
-import {freshAdvertisements, createAdvertisement} from './advertisements.js';
+// import {createAdvert, createAdverts} from'./offer-generation.js';
+// import {freshAdvertisements, createAdvertisement} from './advertisements.js';
 import './map.js';
-// createAdverts(freshAdvertisements);
+// import {getCapacityText} from './capacity-generation';
+// getCapacityText(freshAdvertisements);
+// console.log(freshAdvertisements[0].offer.features)

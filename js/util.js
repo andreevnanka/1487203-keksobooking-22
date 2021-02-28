@@ -1,4 +1,5 @@
 //Функция,выдающая случайные целочисленные значения в заданном интервале
+
 const getRandomInteger = function (min, max) {
   const from = Math.ceil(min);
   const to = Math.floor(max)+1;

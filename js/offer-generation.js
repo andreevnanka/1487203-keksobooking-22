@@ -50,11 +50,11 @@ const createAdvert = function (offerArr) {
     let capacityText= document.createTextNode(wordSet);
     return capacityText;
   };
-    capacity.appendChild(getCapacityText());
-    listItem.appendChild(capacity);
+  capacity.appendChild(getCapacityText());
+  listItem.appendChild(capacity);
 
-    const time = makeElement('p', 'popup__text--time', 'Заезд после ' + advertisement.checkin + ', выезд до ' + advertisement.checkout);
-    listItem.appendChild(time);
+  const time = makeElement('p', 'popup__text--time', 'Заезд после ' + advertisement.checkin + ', выезд до ' + advertisement.checkout);
+  listItem.appendChild(time);
 
   const  features = makeElement('ul', 'popup__features');
   

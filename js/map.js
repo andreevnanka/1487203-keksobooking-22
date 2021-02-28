@@ -1,28 +1,49 @@
-import {LATITUDE_MIN, LATITUDE_MAX, LONGITUDE_MIN, LONGITUDE_MAX, ROUNDING_DEGREE} from './advertisements-data.js';
-import {getRandomNumber} from './util.js';
-import {createAdvert, createAdverts} from'./offer-generation.js';
-import {freshAdvertisements, createAdvertisement} from './advertisements.js';
-// //Неактивное состояние
-// const AD_FORM = document.querySelector('.ad-form');
-// AD_FORM.classList.add('ad-form--disabled');
+import {freshAdvertisements} from './advertisements.js';
+// import {getCapacityText} from './capacity-generation';
+const L = window.L;
+const TOKIO_LATITUDE = 35.6895;
+const TOKIO_LANGITUDE = 139.69171;
+const adForm = document.querySelector('.ad-form');
+const adFormFieldsets = adForm.querySelectorAll('.ad-form__element');
+const mapFilters = document.querySelector('.map__filters');
+const mapFiltersSelects = mapFilters.querySelectorAll('select');
 
-// AD_FORM.querySelectorAll('fieldset').setAttribute('disabled', 'disabled');
+//Неактивное состояние
+//const deactivating = function() {
+adForm.classList.add('ad-form--disabled');
+adFormFieldsets.forEach(function (it) {
+  it.disabled = true;
+});
 
-// const MAP_FILTERS = document.querySelector('.map__filters');
-// MAP_FILTERS.classList.add('map__filters--disabled');
+mapFilters.classList.add('map__filters--disabled');
+mapFiltersSelects.forEach(function (it) {
+  it.disabled = true;
+});
+//};
 
-// MAP_FILTERS.querySelectorAll('select').setAttribute('disabled', 'disabled');
+// Активное состояние
+const activating = function() {
+  adForm.classList.remove('ad-form--disabled');
+  adFormFieldsets.forEach(function (it) {
+    it.disabled = false;
+  });
+
+  mapFilters.classList.remove('map__filters--disabled');
+  mapFiltersSelects.forEach(function (it) {
+    it.disabled = false;
+  });
+};
 
 //Вставка карты
 const map = L.map('map-canvas')
   .on('load', () => {
-    // AD_FORM.classList.remove('ad-form--disabled');
-    // MAP_FILTERS.classList.remove('map__filters--disabled');
+    activating();
   })
   .setView({
-    lat: 35.6895,
-    lng: 139.69171,
-  }, 10);
+    lat: TOKIO_LATITUDE,
+    lng: TOKIO_LANGITUDE,
+  }, 12,
+  );
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -39,8 +60,8 @@ const mainPinIcon = L.icon({
 
 const mainPinMarker = L.marker(
   {
-    lat: 35.6895,
-    lng: 139.69171,
+    lat: TOKIO_LATITUDE ,
+    lng: TOKIO_LANGITUDE,
   },
   {
     draggable: true,
@@ -51,23 +72,38 @@ const mainPinMarker = L.marker(
 mainPinMarker.addTo(map);
 
 mainPinMarker.on('moveend', (evt) => {
-  console.log(evt.target.getLatLng());
+  return(evt.target.getLatLng());
 });
 
-const createCustomPopup = (point) => {
-  const balloonTemplate = document.querySelector('#card').content.querySelector('.popup');
-  const popupElement = balloonTemplate.cloneNode(true);
-  const pointOffer = point.offer;
+freshAdvertisements.forEach((item) => {
+  const pointOffer = item.offer;
+  const pointLocation = item.location;
+  const poinAuthor = item.author;
+  const pointFeatures = pointOffer.features;
 
-  popupElement.querySelector('.popup__title').textContent = pointOffer.title;
-  popupElement.querySelector('.popup__text').textContent = "Координаты:";
+  const createCustomPopup = () => {
+    const balloonTemplate = document.querySelector('#card').content.querySelector('.popup');
+    const popupElement = balloonTemplate.cloneNode(true);
+    popupElement.querySelector('.popup__avatar').src = poinAuthor.avatar;
+    popupElement.querySelector('.popup__title').textContent = pointOffer.title;
+    popupElement.querySelector('.popup__text--address').textContent = `Координаты: ${pointLocation.x}, ${pointLocation.y}`;
+    popupElement.querySelector('.popup__text--price').textContent = `${pointOffer.price}₽/ночь`;
+    popupElement.querySelector('.popup__type').textContent = pointOffer.type;
+    // popupElement.querySelector('.popup__type--capacity').textContent = pointOffer.rooms+'комнат';
+    // popupElement.querySelector('.popup__type--time').textContent = `Заезд после ${pointOffer.checkin}, выезд до ${pointOffer.checkout}`;
+    popupElement.querySelector('.popup__feature--wifi').textContent = pointFeatures.wifi;
+    popupElement.querySelector('.popup__feature--dishwasher').textContent = pointFeatures.dishwasher;
+    popupElement.querySelector('.popup__feature--parking').textContent = pointFeatures.parking;
+    popupElement.querySelector('.popup__feature--washer').textContent = pointFeatures.washer;
+    popupElement.querySelector('.popup__feature--elevator').textContent = pointFeatures.elevator;
+    popupElement.querySelector('.popup__feature--conditioner').textContent = pointFeatures.conditioner;
+    popupElement.querySelector('.popup__description').textContent = pointOffer.description;
 
-  return popupElement;
-};
+    return(popupElement);
+  };
 
-freshAdvertisements.forEach(({offer, location}) => {
-  const lat = location.x;
-  const lng = location.y;
+  const lat = pointLocation.x;
+  const lng = pointLocation.y;
   const icon = L.icon({
     iconUrl: '../img/pin.svg',
     iconSize: [40, 40],
@@ -91,5 +127,5 @@ freshAdvertisements.forEach(({offer, location}) => {
       {
         keepInView: true,
       },
-    );
+    )
 });

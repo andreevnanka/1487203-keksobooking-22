@@ -13,7 +13,12 @@ import {
   LONGITUDE_MAX,
   ROUNDING_DEGREE,
   MAX_ROOMS,
-  MAX_GUESTS
+  MAX_GUESTS,
+  CHECK_IN_MIN,
+  CHECK_IN_MAX,
+  CHECK_OUT_MIN,
+  CHECK_OUT_MAX,
+  PRICE_MAX
 } from './advertisements-data.js';
 
 const x = getRandomNumber(LATITUDE_MIN, LATITUDE_MAX, ROUNDING_DEGREE);

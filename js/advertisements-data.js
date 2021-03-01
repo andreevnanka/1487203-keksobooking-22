@@ -15,7 +15,7 @@ const CHECK_IN_MIN = 12;
 const CHECK_IN_MAX = 14;
 const CHECK_OUT_MIN = 12;
 const CHECK_OUT_MAX = 14;
-const PRICE_MAX = 10000;
+const PRICE_MAX = 1000;
 
 const ADVERTISEMENTS_COUNT = 10;
 

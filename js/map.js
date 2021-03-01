@@ -32,6 +32,9 @@ const activating = function() {
   mapFiltersSelects.forEach(function (it) {
     it.disabled = false;
   });
+  onRoomsQuantityChange();
+  SYNCHRONIZE_TIME();
+  TYPE_PRICE_SYNC();
 };
 
 //Вставка карты
@@ -91,13 +94,13 @@ freshAdvertisements.forEach((item) => {
     popupElement.querySelector('.popup__type').textContent = pointOffer.type;
     // popupElement.querySelector('.popup__type--capacity').textContent = pointOffer.rooms+'комнат';
     // popupElement.querySelector('.popup__type--time').textContent = `Заезд после ${pointOffer.checkin}, выезд до ${pointOffer.checkout}`;
-    popupElement.querySelector('.popup__feature--wifi').textContent = pointFeatures.wifi;
-    popupElement.querySelector('.popup__feature--dishwasher').textContent = pointFeatures.dishwasher;
-    popupElement.querySelector('.popup__feature--parking').textContent = pointFeatures.parking;
-    popupElement.querySelector('.popup__feature--washer').textContent = pointFeatures.washer;
-    popupElement.querySelector('.popup__feature--elevator').textContent = pointFeatures.elevator;
-    popupElement.querySelector('.popup__feature--conditioner').textContent = pointFeatures.conditioner;
-    popupElement.querySelector('.popup__description').textContent = pointOffer.description;
+    // popupElement.querySelector('.popup__feature--wifi').textContent = pointFeatures.wifi;
+    // popupElement.querySelector('.popup__feature--dishwasher').textContent = pointFeatures.dishwasher;
+    // popupElement.querySelector('.popup__feature--parking').textContent = pointFeatures.parking;
+    // popupElement.querySelector('.popup__feature--washer').textContent = pointFeatures.washer;
+    // popupElement.querySelector('.popup__feature--elevator').textContent = pointFeatures.elevator;
+    // popupElement.querySelector('.popup__feature--conditioner').textContent = pointFeatures.conditioner;
+    // popupElement.querySelector('.popup__description').textContent = pointOffer.description;
 
     return(popupElement);
   };

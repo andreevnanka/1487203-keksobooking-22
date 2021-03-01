@@ -1,5 +1,6 @@
 import {freshAdvertisements} from './advertisements.js';
-// import {getCapacityText} from './capacity-generation';
+import {getCapacityRoomsText, getCapacityGuestsText, wordSetRooms, wordSetGuests} from './capacity-text-generation.js';
+
 const L = window.L;
 const TOKIO_LATITUDE = 35.6895;
 const TOKIO_LANGITUDE = 139.69171;
@@ -89,7 +90,7 @@ freshAdvertisements.forEach((item) => {
     popupElement.querySelector('.popup__text--address').textContent = `Координаты: ${pointLocation.x}, ${pointLocation.y}`;
     popupElement.querySelector('.popup__text--price').textContent = `${pointOffer.price}₽/ночь`;
     popupElement.querySelector('.popup__type').textContent = pointOffer.type;
-    // popupElement.querySelector('.popup__type--capacity').textContent = pointOffer.rooms+'комнат';
+    popupElement.querySelector('.popup__text--capacity').textContent = `${pointOffer.rooms} ${getCapacityRoomsText(wordSetRooms,pointOffer.rooms)} ${pointOffer.guests} ${getCapacityGuestsText(wordSetGuests,pointOffer.guests)}`;
     // popupElement.querySelector('.popup__type--time').textContent = `Заезд после ${pointOffer.checkin}, выезд до ${pointOffer.checkout}`;
     // popupElement.querySelector('.popup__feature--wifi').textContent = pointFeatures.wifi;
     // popupElement.querySelector('.popup__feature--dishwasher').textContent = pointFeatures.dishwasher;

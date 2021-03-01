@@ -32,9 +32,6 @@ const activating = function() {
   mapFiltersSelects.forEach(function (it) {
     it.disabled = false;
   });
-  onRoomsQuantityChange();
-  SYNCHRONIZE_TIME();
-  TYPE_PRICE_SYNC();
 };
 
 //Вставка карты
@@ -82,7 +79,7 @@ freshAdvertisements.forEach((item) => {
   const pointOffer = item.offer;
   const pointLocation = item.location;
   const poinAuthor = item.author;
-  const pointFeatures = pointOffer.features;
+  //const pointFeatures = pointOffer.features;
 
   const createCustomPopup = () => {
     const balloonTemplate = document.querySelector('#card').content.querySelector('.popup');

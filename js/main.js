@@ -4,3 +4,4 @@ import './map.js';
 // import {getCapacityText} from './capacity-generation';
 // getCapacityText(freshAdvertisements);
 // console.log(freshAdvertisements[0].offer.features)
+

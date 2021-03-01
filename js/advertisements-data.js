@@ -29,13 +29,6 @@ const TYPES = [
   'bungalow',
 ];
 
-
-const TIME = [
-  '12:00',
-  '13:00',
-  '14:00',
-];
-
 const FEATURES = [
   'wifi',
   'dishwasher',

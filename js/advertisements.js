@@ -55,6 +55,7 @@ const createAdvertisement = function() {
     description: description,
     photos: photos,
   }
+
   const  location = {
     x: x,
     y: y,

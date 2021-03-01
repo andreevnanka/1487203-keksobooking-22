@@ -79,7 +79,7 @@ const createAdvert = function (offerArr) {
   const avatar = makeElement('img', 'popup__avatar');
   avatar.src = author.avatar;
   listItem.appendChild(avatar);
-
+  
   return(listItem);
 };
 
@@ -92,6 +92,7 @@ const createAdverts = function(advertisementsArray) {
     cards.appendChild(popupOffer);
   });
   return(cards);
+
 };
 
 export {createAdvert, createAdverts};

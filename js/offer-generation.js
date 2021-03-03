@@ -58,7 +58,7 @@ const createAdvert = function (offerArr) {
 
   const  features = makeElement('ul', 'popup__features');
   
-  advertisement.features.forEach( (item) => {
+  advertisement.features.forEach((item) => {
     const featuresItem = makeElement('li', 'popup__feature--item', item);
     features.appendChild(featuresItem);
   });
@@ -68,7 +68,7 @@ const createAdvert = function (offerArr) {
   listItem.appendChild(description);
 
   const photos = makeElement('div', 'popup__photos');
-  advertisement.photos.forEach( (item) => {
+  advertisement.photos.forEach((item) => {
     const photo = makeElement('img', 'popup__photo');
     photo.src = item;
     photos.appendChild(photo);

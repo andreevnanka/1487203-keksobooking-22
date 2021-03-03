@@ -1,5 +1,6 @@
 import {freshAdvertisements} from './advertisements.js';
 import {getCapacityRoomsText, getCapacityGuestsText, wordSetRooms, wordSetGuests} from './capacity-text-generation.js';
+import {makeElement} from './util.js';
 
 const L = window.L;
 const TOKIO_LATITUDE = 35.6895;
@@ -80,25 +81,32 @@ freshAdvertisements.forEach((item) => {
   const pointOffer = item.offer;
   const pointLocation = item.location;
   const poinAuthor = item.author;
-  //const pointFeatures = pointOffer.features;
+  const pointFeatures = pointOffer.features;
 
   const createCustomPopup = () => {
     const balloonTemplate = document.querySelector('#card').content.querySelector('.popup');
     const popupElement = balloonTemplate.cloneNode(true);
+    
     popupElement.querySelector('.popup__avatar').src = poinAuthor.avatar;
     popupElement.querySelector('.popup__title').textContent = pointOffer.title;
     popupElement.querySelector('.popup__text--address').textContent = `Координаты: ${pointLocation.x}, ${pointLocation.y}`;
     popupElement.querySelector('.popup__text--price').textContent = `${pointOffer.price}₽/ночь`;
     popupElement.querySelector('.popup__type').textContent = pointOffer.type;
     popupElement.querySelector('.popup__text--capacity').textContent = `${pointOffer.rooms} ${getCapacityRoomsText(wordSetRooms,pointOffer.rooms)} ${pointOffer.guests} ${getCapacityGuestsText(wordSetGuests,pointOffer.guests)}`;
-    // popupElement.querySelector('.popup__type--time').textContent = `Заезд после ${pointOffer.checkin}, выезд до ${pointOffer.checkout}`;
-    // popupElement.querySelector('.popup__feature--wifi').textContent = pointFeatures.wifi;
-    // popupElement.querySelector('.popup__feature--dishwasher').textContent = pointFeatures.dishwasher;
-    // popupElement.querySelector('.popup__feature--parking').textContent = pointFeatures.parking;
-    // popupElement.querySelector('.popup__feature--washer').textContent = pointFeatures.washer;
-    // popupElement.querySelector('.popup__feature--elevator').textContent = pointFeatures.elevator;
-    // popupElement.querySelector('.popup__feature--conditioner').textContent = pointFeatures.conditioner;
-    // popupElement.querySelector('.popup__description').textContent = pointOffer.description;
+    popupElement.querySelector('.popup__text--time').textContent = `Заезд после ${pointOffer.checkin}, выезд до ${pointOffer.checkout}`;
+    
+    const createFeatureFragment = function (pointFeatures) {
+      const featureFragment = makeElement('ul', 'popup__features');
+      pointFeatures.forEach((item) => {
+        const featureItem = document.createElement('li');
+        featureItem.className = `popup__feature popup__feature--${item}`;
+        featureFragment.appendChild(featureItem);
+      });
+      return (featureFragment);
+    };
+    
+    popupElement.replaceChild(createFeatureFragment(pointFeatures), popupElement.querySelector('.popup__features'));
+    popupElement.querySelector('.popup__description').textContent = pointOffer.description;
 
     return(popupElement);
   };

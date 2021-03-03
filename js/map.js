@@ -82,6 +82,7 @@ freshAdvertisements.forEach((item) => {
   const pointLocation = item.location;
   const poinAuthor = item.author;
   const pointFeatures = pointOffer.features;
+  const pointPhotos = pointOffer.photos;
 
   const createCustomPopup = () => {
     const balloonTemplate = document.querySelector('#card').content.querySelector('.popup');
@@ -107,6 +108,19 @@ freshAdvertisements.forEach((item) => {
     
     popupElement.replaceChild(createFeatureFragment(pointFeatures), popupElement.querySelector('.popup__features'));
     popupElement.querySelector('.popup__description').textContent = pointOffer.description;
+
+    const createPhotoFragment = function (pointPhotos) {
+      const photoFragment = makeElement('div', 'popup__photos');
+      pointPhotos.forEach((item) => {
+        const photoItem = makeElement('img', 'popup__photos');
+        photoItem.src = `${item}`;
+        photoItem.width = 45;
+        photoItem.height = 40;
+        photoFragment.appendChild(photoItem);
+      });
+      return (photoFragment);
+    };
+    popupElement.replaceChild(createPhotoFragment(pointPhotos), popupElement.querySelector('.popup__photos'));
 
     return(popupElement);
   };
